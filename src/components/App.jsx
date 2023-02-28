@@ -9,18 +9,12 @@ import { Container, PhonebookTitle, ContactsTitle } from './App.styled';
 
 const stateContacts = [
   { id: 'id-1', name: 'Jane Doe', number: '804(166)220-55-95' },
-  { id: 'id-2', name: 'John Doe', number: '50(061)672-01-68' },
-  { id: 'id-3', name: 'John Paul', number: '5(5102)750-81-58' },
-  { id: 'id-4', name: 'Dennis Wilson', number: '13(8330)970-09-79' },
-  { id: 'id-5', name: 'Rick Bell', number: '2(6388)541-45-72' },
-  { id: 'id-6', name: 'John Gardner', number: '9(989)872-67-35' },
-  { id: 'id-7', name: 'Shane Gonzales', number: '25(019)004-42-80' },
-  { id: 'id-8', name: 'Joseph Duncan', number: '0(06)853-72-53' },
+  { id: 'id-2', name: 'John Doe', number: '50(061)672-01-68' }
 ];
 
 export const App = () => {
   const [contacts, setContacts] = useState(
-    JSON.parse(window.localStorage.getItem('contacts')) || stateContacts
+    () => JSON.parse(window.localStorage.getItem('contacts')) || stateContacts
   );
   const [filter, setFilter] = useState('');
 
@@ -28,7 +22,8 @@ export const App = () => {
     window.localStorage.setItem('contacts', JSON.stringify(contacts));
   }, [contacts]);
 
-  const addContact = (name, number) => {
+  const addContact = ({ name, number }) => {
+
     const newContact = {
       id: nanoid(),
       name,
