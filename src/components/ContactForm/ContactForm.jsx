@@ -15,14 +15,12 @@ const ContactForm = ({ onSubmit, contacts }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-
-    const isInContacts = contacts.some((contact) => contact.name === name);
-
-    if (isInContacts) {
-      alert(`${name} is already in contacts.`);
-    } else {
+    try {
       onSubmit({ name, number });
-      reset();
+      reset()
+    }
+    catch (e) {
+      alert(e.message)
     }
   };
 

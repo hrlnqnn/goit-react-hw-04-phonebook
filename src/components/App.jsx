@@ -30,8 +30,14 @@ export const App = () => {
       number,
     };
 
+    const isInContacts = contacts.some((contact) => contact.name === name);
+
+    if (isInContacts) {
+      throw new Error(`${name} is already in contacts.`)
+    }
+
     setContacts([...contacts, newContact]);
-  };
+  }
 
   const deleteContact = id => {
     setContacts(contacts.filter(contact => id !== contact.id));
